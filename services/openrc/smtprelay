@@ -1,0 +1,25 @@
+#!/sbin/openrc-run
+
+name=$RC_SVCNAME
+
+command="/usr/local/bin/$name"
+command_args="-config"
+
+cfgfile="/etc/$name/$name.ini"
+pidfile="/run/$name.pid"
+
+user="$name:$name"
+
+description="SMTP Relay"
+
+start() {
+	ebegin "Starting $name"
+	start-stop-daemon -bm -S -u $user -p $pidfile -x $command -- $command_args $cfgfile
+	eend $?
+}
+
+stop() {
+    ebegin "Stopping $name"
+    start-stop-daemon -K -p $pidfile
+    eend $?
+}

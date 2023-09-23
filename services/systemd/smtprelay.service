@@ -1,0 +1,12 @@
+[Unit]
+Description=SMTP Relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=smtprelay
+ExecStart=/usr/local/bin/smtprelay -config /etc/smtprelay/smtprelay.ini
+
+[Install]
+WantedBy=multi-user.target

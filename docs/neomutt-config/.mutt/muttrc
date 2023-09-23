@@ -1,0 +1,89 @@
+set mbox_type=Maildir
+set folder="~/Maildir"
+#set mask=".*"
+set mask="!^\\.[^.]"
+set mbox="~/Maildir"
+set record="+.Sent"
+set postponed="+.Drafts"
+set spoolfile="~/Maildir"
+
+
+
+####### send SMTP
+
+#set smtp_url = "smtp://USERNAME@127.0.0.1:PORT/"
+#set smtp_pass = "PASSWORD"
+#set from = "USERNAME@DOMAIN.i2p"
+
+####### receive POP3
+
+#set ssl_force_tls = no
+#set ssl_starttls = no
+#set pop_host = "pop://USERNAME@127.0.0.1:PORT/"
+#set pop_user = "USERNAME"
+#set pop_pass = "PASSWORD"
+#set pop_reconnect=yes
+#set pop_checkinterval=30
+#set pop_delete=yes
+
+
+set edit_headers=yes
+######change width accordingly
+set sidebar_width=24
+
+#Visible at first, then change its value to yes
+set sidebar_visible=yes
+#set sidebar_divider_char='│'
+set sidebar_short_path=yes
+set sidebar_next_new_wrap=yes
+set mail_check_stats
+set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
+#set sidebar_delim=' |'
+#set sidebar_sort=yes
+##color sidebar_new color221 color233
+
+mailboxes ~/Maildir ~/Maildir/.Sent ~/Maildir/.Drafts
+
+# Status Bar -----------------------------------------
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# Index View Options ---------------------------------
+#set date_format="!%a, %b %d, %Y at %I:%M:%S%p %Z"
+#set date_format = "%m/%d"
+set index_format = "%4C [%Z] %{%a, %b %d, %Y %H:%M:%S}  %-30.30F  %s"
+set sort = threads                         # like gmail
+#set sort_browser=date
+set sort_aux = reverse-last-date-received  # like gmail
+set uncollapse_jump                        # don't collapse on an unread message
+#set sort_re                                # thread based on regex
+#set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+# Sidebar Navigation ---------------------------------
+bind index,pager \CP sidebar-prev       # Ctrl-Shift-P - Previous Mailbox
+bind index,pager \CN sidebar-next       # Ctrl-Shift-N - Next Mailbox
+bind index,pager \CO sidebar-open       # Ctrl-Shift-O - Open Highlighted Mailbox
+
+
+##bind index,pager <down>   sidebar-next
+##bind index,pager <up>     sidebar-prev
+##bind index,pager <right>  sidebar-open
+
+# Pager View Options ---------------------------------
+set pager_index_lines = 10 # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop             # don't go to next message automatically
+set menu_scroll            # scroll in menus
+set tilde                  # show tildes like in vim
+unset markers              # no ugly plus signs
+
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html
+
+#macro index b '<enter-command>toggle sidebar_visible<enter>'
+#macro pager b '<enter-command>toggle sidebar_visible<enter>'
+#bind index B bounce-message
+
+#color sidebar_new yellow default
+#source ~/mutt-color-solarised-16.muttrc
+source ~/.mutt/mutt-color-gruvbox.muttrc
